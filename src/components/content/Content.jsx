@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import { Container } from 'reactstrap';
 import { Routes, Route } from 'react-router-dom';
 
-const Content = ({ sidebarIsOpen, toggleSidebar }) => (
-	<Container className={classNames('p-0', { 'is-open': sidebarIsOpen })}>
+const Content = () => (
+	<Container className='p-0 is-open'>
 		<Container fluid className='content'>
 			<Routes>
 				<Route exact path='/' element={<h2>Hello</h2>} />

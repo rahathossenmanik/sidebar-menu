@@ -5,9 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SideBar from './components/sidebar/SideBar';
 import Content from './components/content/Content';
 import './assets/scss/index.scss';
+import classNames from 'classnames';
 
 const App = () => {
-	const [sidebarIsOpen, setSidebarOpen] = useState(true);
+	const [sidebarIsMerged, setSidebarIsMerged] = useState(false);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
 	useEffect(() => {
@@ -17,16 +18,18 @@ const App = () => {
 	});
 
 	useEffect(() => {
-		windowWidth <= 768 ? setSidebarOpen(false) : setSidebarOpen(true);
+		windowWidth <= 768 ? setSidebarIsMerged(true) : setSidebarIsMerged(false);
 	}, [windowWidth]);
-
-	const toggleSidebar = () => setSidebarOpen(!sidebarIsOpen);
 
 	return (
 		<Router>
-			<div className='App wrapper'>
-				<SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} />
-				<Content toggleSidebar={toggleSidebar} sidebarIsOpen={sidebarIsOpen} />
+			<div
+				className={classNames('App wrapper', {
+					'flex-column': sidebarIsMerged,
+				})}
+			>
+				<SideBar />
+				<Content />
 			</div>
 		</Router>
 	);
